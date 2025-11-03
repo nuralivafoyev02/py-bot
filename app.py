@@ -26,6 +26,9 @@ def send():
     # Formdan kelgan maydonlar
     name = request.form.get("name", "").strip()
     phone = request.form.get("phone", "").strip()
+    manager = request.form.get("manager", "").strip()
+    address = request.form.get("address", "").strip()
+    username = request.form.get("tgusername", "").strip()
     message_text = request.form.get("message", "").strip()
 
     # Minimal validatsiya
@@ -39,8 +42,14 @@ def send():
         telegram_message += f"👤 Ism: {name}\n"
     if phone:
         telegram_message += f"📞 Telefon: {phone}\n"
+    if manager:
+        telegram_message += f"👷‍♂️ Qurilish rahbari: {manager}\n"
+    if address:
+        telegram_message += f"📍 Qurilish manzili: {address}\n"
+    if username:
+        telegram_message += f"📱 Telegram Username: {username}\n"
     if message_text:
-        telegram_message += f"✉️ Xabar: {message_text}\n"
+        telegram_message += f"✉️ Smeta: {message_text}\n"
 
     payload = {
         "chat_id": CHAT_ID,
@@ -64,6 +73,9 @@ def api_send():
     data = request.json or {}
     name = (data.get("name") or "").strip()
     phone = (data.get("phone") or "").strip()
+    boss = (data.get("boss") or "").strip()
+    address = (data.get("address") or "").strip()
+    username = (data.get("telegram_username") or "").strip()
     message_text = (data.get("message") or "").strip()
 
     if not (name or phone or message_text):
@@ -74,8 +86,14 @@ def api_send():
         telegram_message += f"👤 Ism: {name}\n"
     if phone:
         telegram_message += f"📞 Telefon: {phone}\n"
+    if boss:
+        telegram_message += f"👷‍♂️ Qurilish rahbari: {boss}\n"
+    if address:
+        telegram_message += f"📍 Qurilish manzili: {address}\n"
+    if username:
+        telegram_message += f"📱 Telegram Username: {username}\n"
     if message_text:
-        telegram_message += f"✉️ Xabar: {message_text}\n"
+        telegram_message += f"✉️ Smeta: {message_text}\n"
 
     payload = {"chat_id": CHAT_ID, "text": telegram_message, "parse_mode": "HTML"}
     resp = requests.post(TELEGRAM_API_URL, data=payload, timeout=10)

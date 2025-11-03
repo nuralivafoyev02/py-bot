@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
-<style>
-  
-</style>
 <body>
 
   <div class="card">
@@ -31,7 +28,7 @@
       <!-- Ism -->
       <div class="form-group">
         <label for="name" class="form-label">👤 Ism Familiya</label>
-        <input type="text" id="name" name="name" class="form-input" placeholder="Masalan: Ismoilov Azizbek" required>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Falonchayev Pispadoncha" required>
       </div>
 
       <!-- Telefon -->
@@ -43,19 +40,25 @@
       <!-- Qurilish rahbari -->
       <div class="form-group">
         <label for="manager" class="form-label">🏗️ Qurilish rahbari</label>
-        <input type="text" id="manager" name="manager" class="form-input" placeholder="Masalan: Karimov Jamshid" required>
+        <input type="text" id="manager" name="manager" class="form-input" placeholder="Qurilish rahbari" required>
       </div>
 
       <!-- Qurilish manzili -->
       <div class="form-group">
         <label for="address" class="form-label">📍 Qurilish manzili</label>
-        <input type="text" id="address" name="address" class="form-input" placeholder="Masalan: Toshkent, Sergeli tumani" required>
+        <input type="text" id="address" name="address" class="form-input" placeholder="Toshkent, Sergeli tumani" required>
+      </div>
+
+      <!-- Telegram Username -->
+      <div class="form-group">
+        <label for="telegram_username" class="form-label">📱 Telegram Username</label>
+        <input type="text" id="tgusername" name="telegram_username" class="form-input" placeholder="@username" required>
       </div>
 
       <!-- Forma / Smeta ma'lumotlari -->
       <div class="form-group">
         <label for="message" class="form-label">📋 Smeta / Forma ma’lumotlari</label>
-        <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Masalan: Forma-5, Forma-6, smeta summasi va boshqalar..." required></textarea>
+        <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Masalan: Forma-5 yoki Forma-6 bor yoki yoq..." required></textarea>
       </div>
 
       <!-- Tugma -->
@@ -63,7 +66,7 @@
 
       <!-- Pastki izoh -->
       <p class="note">
-        Xabar yuborilgandan so‘ng ma’lumotlar avtomatik tarzda Telegram guruhingizga yoki chatga jo‘natiladi.
+        Xabar yuborilgandan so‘ng ma’lumotlar avtomatik tarzda bizga kelib tushadi!
       </p>
     </form>
   </div>
