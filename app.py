@@ -28,7 +28,7 @@ def send():
     phone = request.form.get("phone", "").strip()
     manager = request.form.get("manager", "").strip()
     address = request.form.get("address", "").strip()
-    username = request.form.get("tgusername", "").strip()
+    tgusername = request.form.get("tgusername", "").strip()
     message_text = request.form.get("message", "").strip()
 
     # Minimal validatsiya
@@ -46,8 +46,8 @@ def send():
         telegram_message += f"👷‍♂️ Qurilish rahbari: {manager}\n"
     if address:
         telegram_message += f"📍 Qurilish manzili: {address}\n"
-    if username:
-        telegram_message += f"📱 Telegram Username: {username}\n"
+    if tgusername:
+        telegram_message += f"📱 Telegram Username: {tgusername}\n"
     if message_text:
         telegram_message += f"✉️ Smeta: {message_text}\n"
 
@@ -75,7 +75,7 @@ def api_send():
     phone = (data.get("phone") or "").strip()
     boss = (data.get("boss") or "").strip()
     address = (data.get("address") or "").strip()
-    username = (data.get("telegram_username") or "").strip()
+    tgusername = (data.get("tgusername") or "").strip()
     message_text = (data.get("message") or "").strip()
 
     if not (name or phone or message_text):
@@ -90,8 +90,8 @@ def api_send():
         telegram_message += f"👷‍♂️ Qurilish rahbari: {boss}\n"
     if address:
         telegram_message += f"📍 Qurilish manzili: {address}\n"
-    if username:
-        telegram_message += f"📱 Telegram Username: {username}\n"
+    if tgusername:
+        telegram_message += f"📱 Telegram username: {tgusername}\n"
     if message_text:
         telegram_message += f"✉️ Smeta: {message_text}\n"
 
