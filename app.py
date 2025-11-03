@@ -47,7 +47,7 @@ def send():
     if address:
         telegram_message += f"📍 Qurilish manzili: {address}\n"
     if tgusername:
-        telegram_message += f"📱 Telegram Username: {tgusername}\n"
+        telegram_message += f"📱 Telegram username: @{tgusername}\n"
     if message_text:
         telegram_message += f"✉️ Smeta: {message_text}\n"
 
@@ -91,7 +91,7 @@ def api_send():
     if address:
         telegram_message += f"📍 Qurilish manzili: {address}\n"
     if tgusername:
-        telegram_message += f"📱 Telegram username: {tgusername}\n"
+        telegram_message += f"📱 Telegram username: @{tgusername}\n"
     if message_text:
         telegram_message += f"✉️ Smeta: {message_text}\n"
 

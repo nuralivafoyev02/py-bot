@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uyqur | Qurilish checklist</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
+
 <body>
 
   <div class="card">
-    <h1 class="form-title">🏗️ Uyqur Qurilish Checklist Formasi</h1>
+    <h1 class="form-title">🏗️ Uyqur Checklist</h1>
 
     <!-- Flash xabarlar (Flask uchun) -->
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, msg in messages %}
-          <div class="flash {{ 'success' if category == 'success' else 'error' }}">
-            {{ msg }}
-          </div>
-        {% endfor %}
-      {% endif %}
+    {% if messages %}
+    {% for category, msg in messages %}
+    <div class="flash {{ 'success' if category == 'success' else 'error' }}">
+      {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 
     <form action="/send" method="post" class="form">
@@ -34,7 +36,7 @@
       <!-- Telefon -->
       <div class="form-group">
         <label for="phone" class="form-label">📞 Telefon raqami</label>
-        <input type="number" id="phone" name="phone" class="form-input" placeholder="+998 99 999 99 99" required>
+        <input type="tel" id="phone" name="phone" class="form-input" placeholder="+998 99 999 99 99" required>
       </div>
 
       <!-- Qurilish rahbari -->
@@ -46,19 +48,21 @@
       <!-- Qurilish manzili -->
       <div class="form-group">
         <label for="address" class="form-label">📍 Qurilish manzili</label>
-        <input type="text" id="address" name="address" class="form-input" placeholder="Toshkent, Sergeli tumani" required>
+        <input type="text" id="address" name="address" class="form-input" placeholder="Toshkent, Sergeli tumani"
+          required>
       </div>
 
       <!-- Telegram Username -->
       <div class="form-group">
         <label for="tgusername" class="form-label">📱 Telegram Username</label>
-        <input type="text" id="tgusername" name="tgusername" class="form-input" placeholder="@username" required>
+        <input type="text" id="tgusername" name="tgusername" class="form-input" placeholder="@username">
       </div>
 
       <!-- Forma / Smeta ma'lumotlari -->
       <div class="form-group">
         <label for="message" class="form-label">📋 Smeta / Forma ma’lumotlari</label>
-        <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Masalan: Forma-5 yoki Forma-6 bor yoki yoq..." required></textarea>
+        <textarea id="message" name="message" class="form-textarea" rows="5"
+          placeholder="Masalan: Forma-5 yoki Forma-6 bor yoki yoq..." required></textarea>
       </div>
 
       <!-- Tugma -->
@@ -71,8 +75,34 @@
     </form>
   </div>
 
-  <!-- JavaScript: Yuborish animatsiyasi -->
+  <!-- JavaScript -->
   <script>
+    const phoneInput = document.getElementById("phone");
+
+    // Boshlanishida +998 ni avtomatik qo‘shib qo‘yish
+    phoneInput.addEventListener("focus", () => {
+      if (phoneInput.value === "") {
+        phoneInput.value = "+998 ";
+      }
+    });
+
+    phoneInput.addEventListener("input", (e) => {
+      let value = e.target.value.replace(/\D/g, ""); // raqam bo‘lmaganlarni olib tashla
+
+      // Agar +998 ni o‘chirib tashlamoqchi bo‘lsa, qayta yozib qo‘y
+      if (!value.startsWith("998")) {
+        value = "998";
+      }
+
+      // Formatlash: +998 ** *** ** **
+      let formatted = "+998 ";
+      if (value.length > 3) formatted += value.substring(3, 5);
+      if (value.length > 5) formatted += " " + value.substring(5, 8);
+      if (value.length > 8) formatted += " " + value.substring(8, 10);
+      if (value.length > 10) formatted += " " + value.substring(10, 12);
+
+      e.target.value = formatted;
+    });
     const form = document.querySelector('.form');
     const btn = document.querySelector('#submitBtn');
 
@@ -81,7 +111,16 @@
       btn.innerHTML = '⏳ Yuborilmoqda...';
       btn.style.opacity = '0.8';
     });
+    // 🧍‍♂️ Ism-Familiya bosh harflarini avtomatik katta qilish
+    const fullnameInput = document.getElementById("name");
+    fullnameInput.addEventListener("input", (e) => {
+      const words = e.target.value.split(" ");
+      e.target.value = words
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ");
+    });
   </script>
 
 </body>
+
 </html>
