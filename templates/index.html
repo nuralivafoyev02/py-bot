@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uyqur | Qurilish checklist</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+  <div class="card">
+    <h1 class="form-title">🏗️ Uyqur Qurilish Checklist Formasi</h1>
+
+    <!-- Flash xabarlar (Flask uchun) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash {{ 'success' if category == 'success' else 'error' }}">
+            {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/send" method="post" class="form">
+      <!-- Ism -->
+      <div class="form-group">
+        <label for="name" class="form-label">👤 Ism Familiya</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Masalan: Ismoilov Azizbek" required>
+      </div>
+
+      <!-- Telefon -->
+      <div class="form-group">
+        <label for="phone" class="form-label">📞 Telefon raqami</label>
+        <input type="text" id="phone" name="phone" class="form-input" placeholder="+998 90 123 45 67" required>
+      </div>
+
+      <!-- Qurilish rahbari -->
+      <div class="form-group">
+        <label for="manager" class="form-label">🏗️ Qurilish rahbari</label>
+        <input type="text" id="manager" name="manager" class="form-input" placeholder="Masalan: Karimov Jamshid" required>
+      </div>
+
+      <!-- Qurilish manzili -->
+      <div class="form-group">
+        <label for="address" class="form-label">📍 Qurilish manzili</label>
+        <input type="text" id="address" name="address" class="form-input" placeholder="Masalan: Toshkent, Sergeli tumani" required>
+      </div>
+
+      <!-- Forma / Smeta ma'lumotlari -->
+      <div class="form-group">
+        <label for="message" class="form-label">📋 Smeta / Forma ma’lumotlari</label>
+        <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Masalan: Forma-5, Forma-6, smeta summasi va boshqalar..." required></textarea>
+      </div>
+
+      <!-- Tugma -->
+      <button type="submit" class="submit-btn" id="submitBtn">📨 Telegramga yuborish</button>
+
+      <!-- Pastki izoh -->
+      <p class="note">
+        Xabar yuborilgandan so‘ng ma’lumotlar avtomatik tarzda Telegram guruhingizga yoki chatga jo‘natiladi.
+      </p>
+    </form>
+  </div>
+
+  <!-- JavaScript: Yuborish animatsiyasi -->
+  <script>
+    const form = document.querySelector('.form');
+    const btn = document.querySelector('#submitBtn');
+
+    form.addEventListener('submit', () => {
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Yuborilmoqda...';
+      btn.style.opacity = '0.8';
+    });
+  </script>
+
+</body>
+</html>
